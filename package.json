@@ -1,0 +1,26 @@
+{
+  "name": "hms-saturday",
+  "version": "1.0.0",
+  "description": "an api for user and blogpost",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "build": "node src/index.js",
+    "migrate": "knex migrate:latest --knexfile src/models/knexfile.js",
+    "migrate:down": "knex migrate:down --knexfile src/models/knexfile.js"
+  },
+  "author": "faizul",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "latest"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^2.0.0",
+    "mysql2": "^2.3.3"
+  }
+}
