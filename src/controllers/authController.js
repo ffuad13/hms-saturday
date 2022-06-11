@@ -1,37 +1,22 @@
-const knex = require('../models/knex')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const {user} = require('../models')
 
 exports.register = async (req, res) => {
 	try {
-		const {firstName, lastName, username, email, password} = req.body
-
-		if (firstName && lastName && username && email && password === "") {
-			return res.status(400).send({
-				message: 'field should not be empty'
-			})
-		}
-
+		const {firstname, lastname, username, email, password} = req.body
 		const hashedPassword = bcrypt.hashSync(password, 8)
 
-		let insertData = await knex('users').insert({
-			firstName: firstName,
-			lastName: lastName,
+		let insertUser = await user.create({
+			firstname: firstname,
+			lastname: lastname,
 			username: username,
 			email: email,
 			password: hashedPassword
-		}).then(insertedId => {
-			return insertedId
 		})
-
-		const token = jwt.sign({
-			id: insertData[0]
-		}, process.env.JWT_KEY, {expiresIn: 3600})
 
 		return res.status(201).send({
 			message: 'register success',
-			data: insertData,
-			token: token
 		})
 	} catch (error) {
 		res.status(500).send({
@@ -45,25 +30,25 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
 	try {
-		let getData = await knex('users').where({
-			username: req.body.username
-		}).select('*')
+		let getUser = await user.findOne({
+			where: {username: req.body.username}
+		})
 
-		const isPasswordValid = bcrypt.compareSync(req.body.password, getData[0].password)
+		const isPasswordValid = bcrypt.compareSync(req.body.password, getUser.dataValues.password)
 
 		if (!isPasswordValid) {
 			return res.status(400).send({
-				message: 'pasword invalid'
+				message: 'password invalid'
 			})
 		}
 
 		const token = jwt.sign({
-			id: getData[0].id
+			id: getUser.dataValues.id
 		}, process.env.JWT_KEY, {expiresIn: 3600})
 
 		return res.status(200).send({
 			message: 'login succesfull',
-			data: getData,
+			data: getUser.dataValues.username,
 			token: token
 		})
 	} catch (error) {
