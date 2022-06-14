@@ -20,7 +20,8 @@
     "dotenv": "latest",
     "express": "latest",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^2.0.0",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.6.5",
+    "validator": "^13.7.0"
   }
 }
