@@ -1,0 +1,27 @@
+{
+  "name": "myapi_harisenin",
+  "version": "1.0.0",
+  "description": "This is and example of API using ExpressJs",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "build": "node src/index.js",
+    "migrate": "knex migrate:latest --knexfile src/model/knexfile.js"
+  },
+  "author": "Faizul Fuadi",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "latest"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "jsonwebtoken": "^9.0.0",
+    "knex": "^2.4.2",
+    "mysql2": "^3.3.1",
+    "sequelize": "^6.6.5",
+    "validator": "^13.9.0"
+  }
+}
