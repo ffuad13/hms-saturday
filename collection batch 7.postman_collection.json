@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "f7429ddf-af2f-4367-a677-a6e488003453",
+		"name": "collection batch 7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16564665"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "All Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJMdWlnaTczNjQ0IiwiaWF0IjoxNjkwNzAzNzM0LCJleHAiOjE2OTA3MDM3NjR9.xPKv7ZzRgyZj3W8BUvQ7gy5MCoYs5EGMGIKoUnyrhDs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://10.14.226.226:3003/api/products/",
+							"protocol": "http",
+							"host": [
+								"10",
+								"14",
+								"226",
+								"226"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJMdWlnaTczNjQ0IiwiaWF0IjoxNjkwNzAzODQ0LCJleHAiOjE2OTA3MDc0NDR9.hN2sQvSMc6W4NT-tjjk_AUp8rVdg3FxWng9onOTnZSw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://10.14.226.226:3003/api/products/:productId",
+							"protocol": "http",
+							"host": [
+								"10",
+								"14",
+								"226",
+								"226"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"products",
+								":productId"
+							],
+							"variable": [
+								{
+									"key": "productId",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nama_depan\": \"Luigi 3\",\n    \"nama_belakang\": \"Bros 3\",\n    \"username\": \"Luigi736443\",\n    \"email\": \"ghsye66d3g@gmail.com\",\n    \"password\": \"ilovecoin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.14.226.226:3003/api/register",
+							"protocol": "http",
+							"host": [
+								"10",
+								"14",
+								"226",
+								"226"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJMdWlnaTczNjQ0IiwiaWF0IjoxNjkwOTc4OTQ2LCJleHAiOjE2OTA5ODI1NDZ9.XVAnI90U6tc6wWA9rm-0qMpBYpW2mkKYaqeeXALe41U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nama_depan\": \"Luigi\",\n    \"nama_belakang\": \"Bros\",\n    \"username\": \"LuigiGakGanteng\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.14.226.226:3003/api/user/update",
+							"protocol": "http",
+							"host": [
+								"10",
+								"14",
+								"226",
+								"226"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJMdWlnaTczNjQ0MyIsImlhdCI6MTY5MDk4MzQyOCwiZXhwIjoxNjkwOTg3MDI4fQ.aHD5zNZ7JPfPPEknf7-40jrOyyDKRIC7VhohwQztd7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"old_password\": \"Ilovecoin2$\",\n    \"new_password\": \"Ilovecoin2$1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.14.226.226:3003/api/user/changepassword",
+							"protocol": "http",
+							"host": [
+								"10",
+								"14",
+								"226",
+								"226"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"user",
+								"changepassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Luigi736443\",\n    \"password\": \"ilovecoin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.14.226.226:3003/api/user/login",
+							"protocol": "http",
+							"host": [
+								"10",
+								"14",
+								"226",
+								"226"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload foto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJMdWlnaTczNjQ0MyIsImlhdCI6MTY5MDk4Mjg2MCwiZXhwIjoxNjkwOTg2NDYwfQ.sdCUgu7La79LU8ms5K0h978KWxXbJbbGb-LVkk75UlY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profilepic",
+									"type": "file",
+									"src": "/home/admine/Pictures/Screenshot from 2023-08-02 11-22-16.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://10.14.226.226:3003/api/user/uploadfoto",
+							"protocol": "http",
+							"host": [
+								"10",
+								"14",
+								"226",
+								"226"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"user",
+								"uploadfoto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJMdWlnaTczNjQ0IiwiaWF0IjoxNjkwOTc4OTQ2LCJleHAiOjE2OTA5ODI1NDZ9.XVAnI90U6tc6wWA9rm-0qMpBYpW2mkKYaqeeXALe41U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://10.14.226.226:3003/api/user/delete",
+							"protocol": "http",
+							"host": [
+								"10",
+								"14",
+								"226",
+								"226"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
