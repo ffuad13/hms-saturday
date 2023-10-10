@@ -3,6 +3,7 @@ const express = require('express')
 const PORT = process.env.SERVER_PORT || '4646'
 
 const ProductRoute = require('./routes/product_route')
+const UserRoute = require('./routes/user_route')
 
 const app = express()
 
@@ -14,5 +15,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/product', ProductRoute)
+app.use('/api/user', UserRoute)
 
 app.listen(PORT, ()=> {console.log('The server is running on ' + PORT)})

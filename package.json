@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "migrateknex": "knex migrate:latest --knexfile src/knexmodel/knexfile.js"
   },
   "keywords": [
     "product",
@@ -19,7 +20,9 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "knex": "^3.0.1",
+    "mysql2": "^3.6.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
