@@ -2,7 +2,9 @@ const knex = require('../knexmodel/knex')
 const {user} = require('../models')
 const validator = require('validator')
 const crypt = require('bcrypt')
-const e = require('cors')
+const JWT = require('jsonwebtoken')
+const { where } = require('sequelize')
+const { use } = require('../routes/user_route')
 
 const CreateUser = async (req, res) => {
 	try {
@@ -14,14 +16,6 @@ const CreateUser = async (req, res) => {
 			username: body.username,
 			password: body.password
 		}) */
-		if (!firstname || !lastname || !email || !username || !password) {
-			return res.status(400).send({
-				message: 'some field is missing'
-			})
-		}
-
-		const strongPassword = validator.isStrongPassword(password)
-		if (!strongPassword) return res.status(400).send({message: 'password not strong'})
 
 		const hashedPwd = crypt.hashSync(password, 8)
 
@@ -87,32 +81,57 @@ const DeleteUser = async (req, res) => {
 
 const Login = async (req, res) => {
 	try {
-		const {username, password} = req.body
-		if (!username || !password) {
-			return res.status(400).send({
-				message: 'username and password is required'
-			})
-		}
+		const {userData} = req
+		delete userData.password
 
-		const getUser = await user.findOne({where: {username: username}})
-		if (!user) {
-			return res.status(404).send({
-				message: 'user not found'
-			})
-		}
+		const token = JWT.sign({id: userData.id}, process.env.JWT_SECRET, {expiresIn: 3600})
 
-		const isValidPassword = crypt.compareSync(password, getUser.dataValues.password)
-		if (!isValidPassword) {
-			return res.status(404).send({
-				message: 'invalid password'
-			})
-		}
 
-		return res.status(200).send({message: 'login success'})
+		return res.status(200).send({
+			message: 'login success',
+			token: token,
+			userData
+		})
 	} catch (error) {
 		console.log(error)
 		return res.status(500).send('internal server error')
 	}
 }
 
-module.exports= {CreateUser, GetUsers, UpdateUser, DeleteUser, Login}
+const GetProfile = async (req, res) => {
+	try {
+		const {userID} = req
+
+		const getData = await user.findOne({where: {id: userID.id}})
+		if (!getData) return res.status(404).send({message: 'data not found'})
+
+		return res.status(200).send({
+			message: 'get profile success',
+			data: getData.dataValues
+		})
+	} catch (error) {
+		console.log(error)
+		return res.status(500).send('internal server error')
+	}
+}
+
+const UploadPic = async (req, res) => {
+	try {
+		const {userID} = req
+		console.log(userID)
+		const filename = req.file.filename
+		const path = req.file.path
+
+		const upload = await user.update({profilepict: path}, {where:{id: userID.id}})
+
+		return res.status(201).send({
+			message: "upload success",
+			data: upload
+		})
+	} catch (error) {
+		console.log(error)
+		return res.status(500).send('internal server error')
+	}
+}
+
+module.exports= {CreateUser, GetUsers, UpdateUser, DeleteUser, Login, GetProfile, UploadPic}

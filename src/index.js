@@ -3,6 +3,7 @@ const express = require('express')
 const PORT = process.env.SERVER_PORT || '4646'
 const cors = require('cors')
 const {sequelize} = require('./models')
+const fs = require('fs')
 
 const ProductRoute = require('./routes/product_route')
 const UserRoute = require('./routes/user_route')
@@ -12,6 +13,10 @@ const app = express()
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors({origin: true}))
+
+const uploadProfileDir = `${process.cwd()}/uploads`
+
+if(!fs.existsSync(uploadProfileDir)) fs.mkdirSync(uploadProfileDir)
 
 sequelize.authenticate().then((error) => {
 	console.log('database connection has been established successfully')
